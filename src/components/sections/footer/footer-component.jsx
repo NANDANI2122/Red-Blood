@@ -36,15 +36,15 @@ const FooterComponent = () => {
 
 	const contactLinks = [
 		{
-			title: "(+91)-304-050-9060",
-			link: "tel:+913040509060",
+			title: "(+92)-304-050-9060",
+			link: "tel:+923040509060",
 		},
 		{
-			title: "help@Red Blood.com",
-			link: "mailto:help@Red Blood.com",
+			title: "help@hemocell.com",
+			link: "mailto:help@hemocell.com",
 		},
 		{
-			title: "Delhi,India",
+			title: "Karachi, Pakistan",
 			link: "https://goo.gl/maps/QCLpYP3yyUqdT8HA7",
 		},
 		{
@@ -103,13 +103,13 @@ const FooterComponent = () => {
 				</div>
 				<div className="footer-col fourth-col text-center mt-10 border-t-[1px] border-off_white/[.2] pt-6">
 					<h3 className="not-italic text-center font-regular text-[18px] leading-[34px] text-[#D9D9D9] ">
-						©️ 2023 Red Blood - Website design by{" "}
+						©️ 2023 HemoCell - Website design by{" "}
 						<a
 							href="https://linkedin.com/in/moazamdev"
 							className="underline"
 							target="_blank"
 						>
-							Bit Bandits
+							AlphaDev
 						</a>
 					</h3>
 				</div>

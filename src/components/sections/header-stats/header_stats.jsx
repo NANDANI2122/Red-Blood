@@ -5,7 +5,7 @@ import React from "react";
 // import CardStats from "components/Cards/CardStats.js";
 
 export default function HeaderStats({
-	heading = "Welcome to Red Blood",
+	heading = "Welcome to HemoCell",
 	subheading = "Admin Dashboard",
 }) {
 	return (

@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../public/Red Blood.png";
+import logo from "../../../public/HemoCell Logo black.png";
 
 // import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 // import UserDropdown from "components/Dropdowns/UserDropdown.js";
@@ -53,7 +53,7 @@ export default function Sidebar() {
 										className="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase md:block md:pb-2 text-blueGray-600 whitespace-nowrap"
 										to="/"
 									>
-										Red Blood
+										HemoCell
 									</Link>
 								</div>
 								<div className="flex justify-end w-6/12">

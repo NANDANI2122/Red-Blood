@@ -103,8 +103,8 @@ const ContactPage = () => {
 			key: "email",
 			stepNumber: <MdEmail />,
 			stepName: "Email",
-			stepDescription: "help@Red Blood.com",
-			stepUrl: "mailto:help@Red Blood.com",
+			stepDescription: "help@hemocell.com",
+			stepUrl: "mailto:help@hemocell.com",
 		},
 		{
 			key: "address",

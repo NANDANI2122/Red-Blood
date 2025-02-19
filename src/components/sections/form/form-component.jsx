@@ -22,7 +22,7 @@ const FormComponent = ({
 				</h3>
 				{status === "Submited" ? (
 					<p className="text-center text-white text-sm sm:text-base mt-5">
-						Thank you for contacting Red Blood. We will get back to
+						Thank you for contacting HemoCell. We will get back to
 						you as soon as possible.
 					</p>
 				) : (
