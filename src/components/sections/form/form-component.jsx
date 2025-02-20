@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./form-component-styles.scss";
 import WrapperSection from "../wrapper-section/wrapper-section-component";
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../../firebase/firebase.config';
 
 const FormComponent = ({
 	fields,
@@ -11,7 +13,37 @@ const FormComponent = ({
 	handleSubmit,
 }) => {
 	const [status, setStatus] = useState("Pending");
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const inputStyles = `block w-full flex justify-start items-start rounded-rsm border-0 px-8 py-3 md:px-10 md:py-4 bg-light text-white ring-none placeholder:text-white outline-none focus:ring-1 focus:ring-center focus:bg-dark focus:ring-light sm:text-sm sm:leading-6`;
+
+	const saveToFirestore = async (formData) => {
+		try {
+			setIsSubmitting(true);
+			const docRef = await addDoc(collection(db, 'submissions'), {
+				...formData,
+				timestamp: new Date(),
+			});
+			setStatus("Submitted");
+			setIsSubmitting(false);
+			return true;
+		} catch (error) {
+			console.error("Error saving to Firestore:", error);
+			setIsSubmitting(false);
+			return false;
+		}
+	};
+
+	const handleFormSubmit = async (e) => {
+		e.preventDefault();
+		if (handleSubmit) {
+			handleSubmit(e);
+		}
+		const success = await saveToFirestore(formData);
+		if (success) {
+			setStatus("Submitted");
+		}
+	};
+
 	return (
 		<WrapperSection>
 			<div
@@ -20,7 +52,7 @@ const FormComponent = ({
 				<h3 className="not-italic text-center font-medium text-[16px] sm:text-[25px] leading-[34px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-white">
 					{heading}
 				</h3>
-				{status === "Submited" ? (
+				{status === "Submitted" ? (
 					<p className="text-center text-white text-sm sm:text-base mt-5">
 						Thank you for contacting HemoCell. We will get back to
 						you as soon as possible.
@@ -29,7 +61,7 @@ const FormComponent = ({
 					<form
 						className="contact-form grid grid-cols-1 sm:grid-cols-2 gap-5 w-full relative sm:p-6 py-8 sm:p-10 rounded-rmd z-[25] overflow-hidden"
 						// method="POST"
-						onSubmit={handleSubmit}
+						onSubmit={handleFormSubmit}
 					>
 						{fields.map((field, index) => (
 							<input
@@ -70,28 +102,13 @@ const FormComponent = ({
 							<button
 								type="submit"
 								name="submit"
-								onClick={(e) => {
-									handleSubmit(e);
-									setStatus("Submited");
-								}}
-								className={` rounded-rsm border border-white hover:border-red text-dark bg-white hover:bg-red hover:text-white transition px-10 py-4 text-sm w-fit font-bold w-fit cursor-pointer`}
+								disabled={isSubmitting}
+								className={`rounded-rsm border border-white hover:border-red text-dark bg-white hover:bg-red hover:text-white transition px-10 py-4 text-sm w-fit font-bold cursor-pointer ${
+									isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+								}`}
 							>
-								{buttonText}
+								{isSubmitting ? 'Submitting...' : buttonText}
 							</button>
-							{/* <button
-								className={` rounded-rsm border border-white hover:border-red text-dark bg-white hover:bg-red hover:text-white transition px-10 py-4 text-sm w-fit font-bold w-fit cursor-pointer`}
-								// onClick={() => {
-								// 	handleSubmit;
-								// 	setStatus("Submited");
-								// }}
-								type="submit"
-								onClick={(e) => {
-									handleSubmit(e);
-									setStatus("Submited");
-								}}
-							>
-								{buttonText}
-							</button> */}
 						</div>
 					</form>
 				)}
